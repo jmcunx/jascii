@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2020 2021 
+ * Copyright (c) 2000 2001 2002 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -15,10 +15,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-/*
-* templ_h.c -- Show/help routines
-*
-*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -27,12 +23,6 @@
 #include <j_lib2m.h>
 
 #include "jascii.h"
-
-extern char *jascii_c;
-extern char *jascii_i_c;
-extern char *jascii_s_c;
-
-char *jascii_h_c="$Id: jascii_h.c,v 4.9 2021/07/06 14:13:00 jmccue Exp $";
 
 /*** Messages ***/
 #define MSG_HELP_11  "filter/count non-ASCII characters"
@@ -79,18 +69,9 @@ void show_rev(FILE *fp, char *pname)
 {
   
   fprintf(fp,"%s %s:\n", pname, LIT_REV);
-  fprintf(fp,"\t%s\n", JASCII_H);
-  fprintf(fp,"\t%s\n", jascii_c);
-  fprintf(fp,"\t%s\n", jascii_h_c);
-  fprintf(fp,"\t%s\n", jascii_i_c);
-  fprintf(fp,"\t%s\n", jascii_s_c);
   
-#ifdef J_LIB2M_H
-  fprintf(fp, "\t%s\n", J_LIB2M_H);
-#endif
 #ifdef J_LIB2_H
-  fprintf(fp, "\t%s\n", J_LIB2_H);
-  fprintf(fp,"\t     %s %s\n", LIT_INFO_02, j2_get_build());
+  fprintf(fp,"\t%s %s\n", LIT_INFO_02, j2_get_build());
 #endif
   
 #ifdef OSTYPE
@@ -104,5 +85,3 @@ void show_rev(FILE *fp, char *pname)
   exit(EXIT_FAILURE);
   
 }  /* show_rev() */
-
-/* END: jascii_h.c */

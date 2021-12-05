@@ -1,5 +1,5 @@
 .\" 
-.\" Copyright (c) 2000 2001 2002 ... 2017 2018 
+.\" Copyright (c) 2000 2001 2002 ... 2021 2022
 .\"     John McCue <jmccue@jmcunx.com>
 .\" 
 .\" Permission to use, copy, modify, and distribute this software for any
@@ -14,10 +14,7 @@
 .\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 .\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 .\" 
-
-.\"	@(#)skeleton	5.1 - 85/05/07
-.\"	For more information, see man(5F).
-.TH jascii 1 "$Date: 2021/07/06 17:48:10 $" "JMC" "User Commands"
+.TH jascii 1 "2021/07/06" "JMC" "User Commands"
 .SH NAME
 jascii - filter/count non-ASCII characters
 .SH SYNOPSIS
@@ -140,7 +137,7 @@ Or the same can be done by:
 .nf
     tr -cd "[:alnum:]" < /dev/urandom | fold -w 20 | sed 10q
 .fi
-But in this case you may get some non-US ascii characters.
+But in this case you may get some non-US ASCII characters.
 
 .SH DIAGNOSTICS
 .PP

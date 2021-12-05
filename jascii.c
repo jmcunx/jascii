@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2020 2021
+ * Copyright (c) 2000 2001 2002 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -14,15 +14,23 @@
  * ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
-
 /* jascii -- non-ASCII character analysis */
+
+#ifndef _MSDOS
+#include <sys/param.h>
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #ifndef _AIX
 #include <getopt.h>
+#endif
+
+#ifdef OpenBSD
+#include <err.h>
 #endif
 
 #include <errno.h>
@@ -32,13 +40,11 @@
 
 #include "jascii.h"
 
-#ifdef MSDOS
+#ifdef _MSDOS
 #define RMODE "rb"
 #else
 #define RMODE "r"
 #endif
-
-char *jascii_c="$Id: jascii.c,v 4.14 2021/02/21 19:12:40 jmccue Exp $";
 
 #ifdef DEBUG
 /*
@@ -414,5 +420,3 @@ int main(int argc, char **argv)
   exit(EXIT_SUCCESS);
 
 } /* main() */
-
-/* END: jascii.c */

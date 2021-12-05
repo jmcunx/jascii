@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2020 2021
+ * Copyright (c) 2000 2001 2002 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -20,7 +20,7 @@
 */
 #ifndef JASCII_H
 
-#define JASCII_H "$Id: jascii.h,v 4.6 2021/07/06 14:13:18 jmccue Exp $"
+#define JASCII_H "INCLUDED"
 
 #define PNAME    "jascii"
 #define BAD_CHAR '*'

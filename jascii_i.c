@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2020 2021
+ * Copyright (c) 2000 2001 2002 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -19,7 +19,9 @@
  * jascii_i.c -- Init / free Routines
  */
 
+#ifndef _MSDOS
 #include <sys/param.h>
+#endif
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -36,11 +38,50 @@
 
 #define SCKARG 80
 
-/*** globals ***/
-char *jascii_i_c="$Id: jascii_i.c,v 4.11 2021/07/06 14:12:45 jmccue Exp $";
-
-/*** prototype ***/
-int init_get_delm(FILE *, char *, char *);
+/*
+ * init_get_delm() -- translate a string into a delimiter
+ */
+int init_get_delm(FILE *fp, char *s, char *prog_name)
+  
+{
+  int d;
+  int c = JLIB2_CHAR_NULL;
+  
+  if (s == (char *) NULL)
+    return(c);
+  
+  if (strlen(s) == 1)
+    {
+      if ( ((*s) > 47)  && ((*s) < 58) ) /* 0 -- 9 */
+	c = (*s) - 48;
+      else
+	c = (*s);
+    }
+  else
+    {
+      if (j2_is_numr(s) == (int) TRUE)
+	{
+	  d = atoi(s);
+	  if ((d > -1) && (d < 128))
+	    c = (char) d;
+	  else
+	    {
+	      fprintf(fp, MSG_ERR_E049, s);
+	      fprintf(fp, MSG_ERR_E000, prog_name, SWITCH_CHAR, ARG_HELP);
+	      exit(EXIT_FAILURE);
+	    }
+	}
+      else
+	{
+	  fprintf(fp, MSG_ERR_E049, s);
+	  fprintf(fp, MSG_ERR_E000, prog_name, SWITCH_CHAR, ARG_HELP);
+	  exit(EXIT_FAILURE);
+	}
+    }
+  
+  return(c);
+  
+} /* init_get_delm() */
 
 /*
  * raw_free() -- free memory
@@ -151,11 +192,12 @@ void process_arg(int argc, char **argv, struct s_work *w)
   char *fout = (char *) NULL; 
   char *ferr = (char *) NULL; 
   
-  snprintf(ckarg, SCKARG, "%c%c:%c:%c:%c%c%c%c%c:%c:%c:%c%c%c%c", 
-	  ARG_CHAR,  ARG_DELM, ARG_ERR,     ARG_HELP, 
-          ARG_FORCE, ARG_KEEP, ARG_LETTERS, ARG_ONLY_7BIT, ARG_MAX_LINES,
-          ARG_ADDNL, ARG_OUT,  ARG_VERBOSE, ARG_VERSION,
-	  ARG_STATS_ONLY, ARG_SHOW_NONASCII);
+  snprintf(ckarg, SCKARG, "%c:%c:%c:%c:%c:%c:%c%c%c%c%c%c%c%c%c",
+	   ARG_CHAR,      ARG_DELM,    ARG_ERR,     ARG_MAX_LINES,
+	   ARG_ADDNL,     ARG_OUT,
+	   ARG_HELP,      ARG_FORCE,   ARG_KEEP,    ARG_LETTERS,
+	   ARG_ONLY_7BIT, ARG_VERBOSE, ARG_VERSION, ARG_STATS_ONLY,
+	   ARG_SHOW_NONASCII);
   
   while ((opt = getopt(argc, argv, ckarg)) != -1)
     {
@@ -276,50 +318,3 @@ int open_out(FILE *wfp, struct s_file_info *f, char *fname, int force)
   return(EXIT_SUCCESS);
   
 } /* open_out() */
-
-/*
- * init_get_delm() -- translate a string into a delimiter
- */
-int init_get_delm(FILE *fp, char *s, char *prog_name)
-  
-{
-  int d;
-  int c = JLIB2_CHAR_NULL;
-  
-  if (s == (char *) NULL)
-    return(c);
-  
-  if (strlen(s) == 1)
-    {
-      if ( ((*s) > 47)  && ((*s) < 58) ) /* 0 -- 9 */
-	c = (*s) - 48;
-      else
-	c = (*s);
-    }
-  else
-    {
-      if (j2_is_numr(s) == (int) TRUE)
-	{
-	  d = atoi(s);
-	  if ((d > -1) && (d < 128))
-	    c = (char) d;
-	  else
-	    {
-	      fprintf(fp, MSG_ERR_E049, s);
-	      fprintf(fp, MSG_ERR_E000, prog_name, SWITCH_CHAR, ARG_HELP);
-	      exit(EXIT_FAILURE);
-	    }
-	}
-      else
-	{
-	  fprintf(fp, MSG_ERR_E049, s);
-	  fprintf(fp, MSG_ERR_E000, prog_name, SWITCH_CHAR, ARG_HELP);
-	  exit(EXIT_FAILURE);
-	}
-    }
-  
-  return(c);
-  
-} /* init_get_delm() */
-
-/* END: jascii_i.c */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2020 2021
+ * Copyright (c) 2000 2001 2002 ... 2021 2022
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -19,7 +19,9 @@
  * show data module
  */
 
+#ifndef _MSDOS
 #include <sys/param.h>
+#endif
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
@@ -29,8 +31,6 @@
 #include "jascii.h"
 
 #define SFMT 20
-
-char *jascii_s_c="$Id: jascii_s.c,v 4.9 2021/07/06 14:11:54 jmccue Exp $";
 
 /*
  * show_fmt_c() -- write a formatted character
@@ -349,5 +349,3 @@ void show_count_line(FILE *fp, struct s_counts amt)
 	  (long) amt.count_utfc);
 
 } /* show_count_line() */
-
-/* END: jascii_s.c */
