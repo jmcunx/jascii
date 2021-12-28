@@ -342,7 +342,7 @@ struct s_raw *raw_load(struct s_work *w, char *fname, long max_recs)
       return(raw);
     }
 
-  while ((cbytes = getline(&buf, &bsize, fp)) > (ssize_t) -1)
+  while ((cbytes = j2_getline(&buf, &bsize, fp)) > (ssize_t) -1)
     {
       creads++;
       if ((max_recs > 0L) && (creads > max_recs))
