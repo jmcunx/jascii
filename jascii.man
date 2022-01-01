@@ -1,11 +1,11 @@
-.\" 
-.\" Copyright (c) 2000 2001 2002 ... 2021 2022
+.\"
+.\" Copyright (c) 2000 2001 2002 ... 2022 2023
 .\"     John McCue <jmccue@jmcunx.com>
-.\" 
+.\"
 .\" Permission to use, copy, modify, and distribute this software for any
 .\" purpose with or without fee is hereby granted, provided that the above
 .\" copyright notice and this permission notice appear in all copies.
-.\" 
+.\"
 .\" THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
 .\" WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
 .\" MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
@@ -13,8 +13,8 @@
 .\" WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
 .\" ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 .\" OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
-.\" 
-.TH jascii 1 "2021/07/06" "JMC" "User Commands"
+.\"
+.TH JASCII 1 "2021-07-06" "JMC" "User Commands"
 .SH NAME
 jascii - filter/count non-ASCII characters
 .SH SYNOPSIS
@@ -27,7 +27,7 @@ Will also count UTF-8 Bytes/Characters.
 If no files (FILE) are specified on the command line or
 if FILE has name "-", stdin (Standard Input) is used.
 .TP
--c x    
+-c x
 Optional, replace non-ASCII characters with character 'x'
 instead of using the default of '*'.
 .TP
@@ -130,7 +130,7 @@ to get a list of random passwords of size 20:
        or
     jascii -n 20 -m 10 -l /dev/urandom
 .fi
-In this case, -m stops after 
+In this case, -m stops after
 finding the tenth new-line character.
 .PP
 Or the same can be done by:
@@ -140,7 +140,6 @@ Or the same can be done by:
 But in this case you may get some non-US ASCII characters.
 
 .SH DIAGNOSTICS
-.PP
 To get random data, read /dev/urandom.
 On some Linux systems, reading /dev/random could
 cause slow-downs as data is generated.
