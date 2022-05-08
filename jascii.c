@@ -417,6 +417,19 @@ int main(int argc, char **argv)
 	  show_summary_totl(w.out.fp, "Grand Totals", "Files", grandc);
 	}
     }
+
+  if (w.pname != (char *) NULL)
+    free(w.pname);
+
+  if (w.out.ok_to_close == TRUE)
+    fclose(w.out.fp);
+  if (w.out.fname != (char *) NULL)
+    free(w.out.fname);
+  if (w.err.ok_to_close == TRUE)
+    fclose(w.err.fp);
+  if (w.err.fname != (char *) NULL)
+    free(w.err.fname);
+
   exit(EXIT_SUCCESS);
 
 } /* main() */

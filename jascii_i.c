@@ -112,8 +112,9 @@ void raw_free(struct s_raw **raw)
 void file_info_init(struct s_file_info *f)
 
 {
-  f->fp    = (FILE *) NULL;
-  f->fname = (char *) NULL;
+  f->fp          = (FILE *) NULL;
+  f->fname       = (char *) NULL;
+  f->ok_to_close = FALSE;
 
 } /* file_info_init() */
 
@@ -287,8 +288,7 @@ void process_arg(int argc, char **argv, struct s_work *w)
 int open_out(FILE *wfp, struct s_file_info *f, char *fname, int force)
 
 {
-  int errsave;
-  
+  f->ok_to_close = FALSE;
   if (fname == (char *) NULL)
     return(EXIT_SUCCESS);
   if (strcmp(fname, FILE_NAME_STDOUT) == 0)
@@ -304,17 +304,17 @@ int open_out(FILE *wfp, struct s_file_info *f, char *fname, int force)
     }
   
   f->fp = fopen(fname, "w");
-  errsave = errno;
   if (f->fp == (FILE *) NULL)
     {
       f->fp = stderr;  /* needs to be something */
       fprintf(wfp, MSG_ERR_E002, fname);
-      fprintf(wfp, "\t%s\n", strerror(errsave));
+      fprintf(wfp, "\t%s\n", strerror(errno));
       return(EXIT_FAILURE);
     }
   
   /*** success, save file name ***/
   f->fname = strdup(fname);
+  f->ok_to_close = TRUE;
   return(EXIT_SUCCESS);
   
 } /* open_out() */

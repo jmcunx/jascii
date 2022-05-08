@@ -49,6 +49,7 @@ struct s_file_info
 {
   FILE *fp;
   char *fname;
+  int ok_to_close;
 } ;
 
 struct s_work
