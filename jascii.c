@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000 2001 2002 ... 2021 2022
+ * Copyright (c) 2000 2001 2002 ... 2023 2024
  *     John McCue <jmccue@jmcunx.com>
  *
  * Permission to use, copy, modify, and distribute this software for any
@@ -35,8 +35,11 @@
 
 #include <errno.h>
 #include <ctype.h>
+
+#ifdef HAVE_JLIB
 #include <j_lib2.h>
 #include <j_lib2m.h>
+#endif
 
 #include "jascii.h"
 

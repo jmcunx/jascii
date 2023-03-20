@@ -1,6 +1,6 @@
 # for jascii
 #
-# Copyright (c) 2022 2023
+# Copyright (c) 2022 2023 2024
 #     John McCue <jmccue@jmcunx.com>
 #
 # Permission to use, copy, modify, and distribute this software for any
@@ -68,7 +68,9 @@ CTAGS=ctags
 ECHO=echo
 GZIP=gzip
 LINK=cc
-LIBS=-lj_lib2
+#NO_JLIB#LIBS=
+#FOUND_JLIB#LIBS=-lj_lib2
+#FOUND_JLIB#HJLIB=-DHAVE_JLIB
 MV=mv
 RM=rm -f
 STRIP=strip
@@ -79,14 +81,20 @@ OBJ=.o
 
 #--- for prod
 CFLAGS=-O1 -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
-LFLAGS=-O1 $(WALL) -LJLIBLOC -o jascii $(LIBS)
+#FOUND_JLIB#LFLAGS=-O1 $(WALL) -LJLIBLOC -o jascii $(LIBS)
+#NO_JLIB#LFLAGS=-O1 $(WALL) -o jascii $(LIBS)
 
 #--- for valgrind
-#CFLAGS=-O0 -g -c $(WALL) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
-#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jascii $(LIBS)
+#VALGRIND#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+#VALGRIND##FOUND_JLIB#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jascii $(LIBS)
+#VALGRIND##NO_JLIB#LFLAGS=-O0 -g $(WALL) -o jascii $(LIBS)
 
-ALL_OBJ=jascii$(OBJ) jascii_h$(OBJ) jascii_i$(OBJ) jascii_s$(OBJ)
-ALL_C=jascii.c jascii_h.c jascii_i.c jascii_s.c
+#--- continue on
+#NO_JLIB#JCC=jascii_j.c
+#NO_JLIB#JCOB=jascii_j$(OBJ)
+
+ALL_OBJ=jascii$(OBJ) jascii_h$(OBJ) jascii_i$(OBJ) $(JCOB) jascii_s$(OBJ)
+ALL_C=jascii.c jascii_h.c jascii_i.c $(JCC) jascii_s.c
 ALL_H=jascii.h
 
 #
@@ -145,4 +153,3 @@ clean:
 	-$(RM) Makefile
 
 ### END
-

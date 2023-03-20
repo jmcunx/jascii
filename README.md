@@ -5,7 +5,7 @@ jascii will examine any file and print out ASCII data.
 This was created for Systems that does not have strings(1).
 If strings(1) is present, you may want to use that instead.
 
-This requires [j\_lib2](https://github.com/jmcunx/j_lib2) to build.
+[j\_lib2](https://github.com/jmcunx/j_lib2) is an **optional** dependency.
 
 [GNU automake](https://en.wikipedia.org/wiki/Automake)
 only confuses me, but this seems to be good enough for me.
