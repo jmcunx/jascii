@@ -86,8 +86,9 @@ OBJ=.o
 #NO_JLIB#LFLAGS=-O1 $(WALL) -o jascii $(LIBS)
 
 #--- for valgrind
-#VALGRIND#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
+#VALGRIND##FOUND_JLIB#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -IINCJLIB -DOSTYPE="\"$(OSDESC)\""
 #VALGRIND##FOUND_JLIB#LFLAGS=-O0 -g $(WALL) -LJLIBLOC -o jascii $(LIBS)
+#VALGRIND##NO_JLIB#CFLAGS=-O0 -g -c $(WALL) $(HJLIB) -DOSTYPE="\"$(OSDESC)\""
 #VALGRIND##NO_JLIB#LFLAGS=-O0 -g $(WALL) -o jascii $(LIBS)
 
 #--- continue on
